@@ -1,7 +1,15 @@
 module MemcachedTags
   def self.included(base)
-    base.send :alias_method_chain :read, :tags
-    base.send :alias_method_chain :write, :tags
+    base.send :alias_method_chain, :read, :tags
+    base.send :alias_method_chain, :write, :tags
+    
+    unless base.method_defined? :read_multy
+      base.class_eval do
+        def read_multi(*keys)
+          @data.get_multi(*keys)
+        end
+      end
+    end
   end
 
   def read_with_tags key, options = nil
