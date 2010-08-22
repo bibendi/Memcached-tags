@@ -1,0 +1,18 @@
+MemcachedTags
+=============
+
+Introduction goes here.
+
+
+Example
+=======
+
+Rails.cache.write 'key', 'value', {:tags => ['company_1', 'user_2']}
+Rails.cache.read 'key'
+=> "value"
+Rails.cache.delete_by_tags ['user_2']
+Rails.cache.read 'key'
+=> nil
+
+
+Copyright (c) 2010 Bibendi, released under the MIT license
